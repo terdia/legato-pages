@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Legato Console - Legato</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Legato Console";
+    var mkdocs_page_input_path = "console.md";
+    var mkdocs_page_url = "/console/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Legato</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../routing/">Routing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../controller/">Controllers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../views/">Views</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../database/">Database</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../models/">Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../validation/">Validation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mail/">Sending Mail</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Legato Console</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#generating-commands">Generating Commands</a></li>
+    
+
+    <li class="toctree-l2"><a href="#registering-your-commands">Registering Your Commands</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-you-command">Running You Command</a></li>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Legato</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Legato Console</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Legato console is built on to of Symfony console, providing some useful commands out of the box, see all available commands simply type: </p>
+<p><code>php Legato list</code></p>
+<h3 id="generating-commands">Generating Commands</h3>
+<p>To create a new command, use the add:command Legato command. This command will create a new command class in the app/commands directory. </p>
+<p><code>php legato add:command MyCommand</code></p>
+<p>out file: app/commands/MyCommand.php with the following contents</p>
+<pre><code class="php">
+&lt;?php
+namespace App\Command;
+
+use Legato\Framework\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class MyCommand extends Command
+{
+    /**
+     * Identifier for the console command
+     *
+     * @var string
+     */
+    protected $commandName = 'example:command';
+
+    /**
+     * Command description
+     *
+     * @var string
+     */
+    protected $description = 'Sample command without argument';
+
+    public function __construct($name = null)
+    {
+        parent::__construct($name);
+    }
+
+    /**
+     * You command logic
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
+    public function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output-&gt;write('This is a sample command.');
+    }
+}
+
+</code></pre>
+
+<h3 id="registering-your-commands">Registering Your Commands</h3>
+<p>To register your commands, simple add then to the <code>app/commands/register.php</code> like so </p>
+<pre><code class="php">
+&lt;?php
+
+return [
+    \App\Command\Example::class,
+    \App\Command\MyCommand::class,
+];
+
+</code></pre>
+
+<p>make sure to use the fully qualified class name as shown in the code snippet above i.e. include namespace if any</p>
+<h3 id="running-you-command">Running You Command</h3>
+<p>To run you command type:</p>
+<p><code>php legato example:command</code> </p>
+<p>and the output based on the example here will be "This is a sample command."</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../mail/" class="btn btn-neutral" title="Sending Mail"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../mail/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

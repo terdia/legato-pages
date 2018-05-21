@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Validation - Legato</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Validation";
+    var mkdocs_page_input_path = "validation.md";
+    var mkdocs_page_url = "/validation/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Legato</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../routing/">Routing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../controller/">Controllers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../views/">Views</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../database/">Database</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../models/">Model</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Validation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#use-case-create-user">Use case (Create User)</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#define-routes">Define Routes</a></li>
+        
+            <li><a class="toctree-l3" href="#create-a-controller-with-validation-logic">Create a Controller with Validation Logic</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#displaying-validation-errors">Displaying Validation Errors</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#getting-validation-errors-for-specific-fields">Getting Validation errors for specific fields</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#available-validation-rules">Available Validation Rules</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#unique-rule">#Unique rule</a></li>
+        
+            <li><a class="toctree-l3" href="#required-rule">#Required rule</a></li>
+        
+            <li><a class="toctree-l3" href="#alphanum-rule">#AlphaNum rule</a></li>
+        
+            <li><a class="toctree-l3" href="#alpha-rule">#Alpha rule</a></li>
+        
+            <li><a class="toctree-l3" href="#email-rule">#Email rule</a></li>
+        
+            <li><a class="toctree-l3" href="#numeric-rule">#Numeric rule</a></li>
+        
+            <li><a class="toctree-l3" href="#min-rule">#Min rule</a></li>
+        
+            <li><a class="toctree-l3" href="#max-rule">#Max rule</a></li>
+        
+            <li><a class="toctree-l3" href="#string-rule">#String rule</a></li>
+        
+            <li><a class="toctree-l3" href="#float-rule">#Float rule</a></li>
+        
+            <li><a class="toctree-l3" href="#mixed-rule">#Mixed rule</a></li>
+        
+            <li><a class="toctree-l3" href="#ip-rule">#IP rule</a></li>
+        
+            <li><a class="toctree-l3" href="#url-rule">#Url rule</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mail/">Sending Mail</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../console/">Legato Console</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Legato</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Validation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Legato provides different methods to easily validate data coming into your application.</p>
+<h2 id="use-case-create-user">Use case (Create User)</h2>
+<p>Lets consider a simple example, we shall attempt to create a new User, the first 
+thing we need to do define the necessary routes</p>
+<h3 id="define-routes">Define Routes</h3>
+<pre><code class="php">&lt;?php
+
+use Legato\Framework\Routing\Route;
+
+/**
+ * show the form to create a user
+ */
+
+Route::get('/user/create', 'App\Controllers\UserController@showForm', 'create_user_form');
+
+/**
+ * handle the create user request, this is where we do validation
+ */
+
+Route::post('/user/create', 'App\Controllers\UserController@create', 'create_user');
+
+</code></pre>
+
+<h3 id="create-a-controller-with-validation-logic">Create a Controller with Validation Logic</h3>
+<p>next we add the UserController class and the create method</p>
+<pre><code class="php">&lt;?php
+namespace App\Controllers;
+
+use App\Models\User;
+use Legato\Framework\Validator\Validator;
+
+class UserController extends BaseController
+{
+
+    public function create()
+    {
+        $rules = [
+            'username' =&gt; ['required' =&gt; true, 'min' =&gt; 6, 'max' =&gt; 20, 'alphaNum' =&gt; true, 'unique' =&gt; 'users'],
+            'email' =&gt; ['required' =&gt; true, 'email' =&gt; true],
+            'password' =&gt; ['required' =&gt; true, 'min' =&gt; 6],
+        ];
+
+        /**
+             * @param, postData, the data that is under validation
+             * @param, rules, set of rules that must be satisfied
+             * @param, custom error messages (optional)
+         */
+
+        $validator = new Validator($this-&gt;request-&gt;all(), $rules);
+
+        if($validator-&gt;fail()){
+            //handle validation error
+            $errorBag = $validator-&gt;error()-&gt;get(); //mu
+        }
+
+        //create user 
+        User::create($this-&gt;request-&gt;all());
+    }
+}
+</code></pre>
+
+<p>You can see that we only had to create a new instance of
+<code>Legato\Framework\Validator\Validator::class</code> and pass it the requires parameters, which are
+ <code>postData</code>, <code>rules</code>, and optionally a <code>custom</code> error message to replace the default.</p>
+<h2 id="displaying-validation-errors">Displaying Validation Errors</h2>
+<p>If the request data does not pass validation, you can easily get all the 
+validation errors from the validator instance </p>
+<pre><code class="php">&lt;?php
+
+     if($validator-&gt;fail()){
+         //handle validation error
+         $errorBag = $validator-&gt;error()-&gt;get();
+
+         foreach ($errorBag as $errors) {
+             foreach ($errors as $error){
+                 echo $error . '&lt;br /&gt;';
+             }
+         }
+     }
+
+</code></pre>
+
+<h3 id="getting-validation-errors-for-specific-fields">Getting Validation errors for specific fields</h3>
+<p>If you will wish to get validation errors for each field separately then you can do the following:</p>
+<pre><code class="php">&lt;?php
+
+ /**
+     * Check if a given key exists in error message
+     *
+     * @param $key
+     * @return bool
+ */
+
+ $exists = $validator-&gt;error()-&gt;has('username');
+
+
+ /**
+    *  Get all the validation errors for a specific fields
+ * 
+    *  @param $key   
+    *  @return array
+ */
+
+$usernameErrors = $validator-&gt;error()-&gt;get('username');
+
+/**
+    * Get the first validation error for a specific fields
+ * 
+    * @param $key
+    * @return mixed   
+ */
+
+$firstErrors = $validator-&gt;error()-&gt;first('username');
+
+</code></pre>
+
+<h2 id="available-validation-rules">Available Validation Rules</h2>
+<p>The following validation rule are available starting from 
+Legato v1.0.9, there is no validation feature for older versions:</p>
+<h3 id="unique-rule">#Unique rule</h3>
+<p>The <code>unique</code> rule allows you to check if a given value exists in a specific database
+table, specific the unique rule like so: </p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['unique' =&gt; 'users',],
+    ];
+
+</code></pre>
+
+<p>where username is a valid column in the users table.</p>
+<h3 id="required-rule">#Required rule</h3>
+<p>The <code>required</code> rule is use to specific that a specific field cannot be empty, the example 
+below ensure that the user cannot signup unless they provide a username: </p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['required' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="alphanum-rule">#AlphaNum rule</h3>
+<p>The <code>alphaNum</code> rule is use to validate alphanumeric, returns 
+true if every character in text under validation is either
+a letter or a digit: e.g. Terdia07</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['alphaNum' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="alpha-rule">#Alpha rule</h3>
+<p>The <code>alpha</code> rule is use to validate alphabetic, returns 
+true if every character in text under validation is a 
+letter from the current locale: e.g. Terdia</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['alpha' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="email-rule">#Email rule</h3>
+<p>The <code>email</code> rule is use to validate email address:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['email' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="numeric-rule">#Numeric rule</h3>
+<p>The <code>numeric</code> rule is use to Check for numeric character, returns true 
+if every character in the string is a decimal digit:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['numeric' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="min-rule">#Min rule</h3>
+<p>The <code>min</code> rule is validate the minimum length for the given value, 
+returns false if length of the value is less than rule:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['min' =&gt; 6,],
+    ];
+
+</code></pre>
+
+<h3 id="max-rule">#Max rule</h3>
+<p>The <code>max</code> rule is validate the maximum length for the given value, 
+returns false if length of value is greater than rule:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'username' =&gt; ['max' =&gt; 6,],
+    ];
+
+</code></pre>
+
+<h3 id="string-rule">#String rule</h3>
+<p>The <code>string</code> rule will allow you validate fields such as fullname that can have multiple words
+ e.g. Osayawe Terry, returns false if the value under validation contains number:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'fullname' =&gt; ['max' =&gt; 6, 'string' =&gt; true],
+    ];
+
+</code></pre>
+
+<h3 id="float-rule">#Float rule</h3>
+<p>The <code>float</code> rule is use to check if the value under validation 
+is a float e.g. 67.0, 89 is also valid:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'price' =&gt; ['float' =&gt; true],
+    ];
+
+</code></pre>
+
+<h3 id="mixed-rule">#Mixed rule</h3>
+<p>The <code>mixed</code> rule will allow you valid a sentence, this is suitable for validating
+ data that might contain some special character 
+ e.g. That's the car, parked over there, it can contain letters, numbers and
+ any of the following A-Za-z0-9 .,_~-!@#\&amp;%'* special characters:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'post_body' =&gt; ['mixed' =&gt; true,],
+    ];
+
+</code></pre>
+
+<h3 id="ip-rule">#IP rule</h3>
+<p>The <code>ip</code> rule is use to check if the value under validation 
+is a valid IP address e.g. 127.0.0.1:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'IP Address' =&gt; ['ip' =&gt; true],
+    ];
+
+</code></pre>
+
+<h3 id="url-rule">#Url rule</h3>
+<p>The <code>url</code> rule is use to check if the value under validation 
+is a valid URL e.g. http://docs.legatoframework.com:</p>
+<pre><code class="php">&lt;?php
+
+    $rules = [
+        'Website' =&gt; ['url' =&gt; true],
+    ];
+
+</code></pre>
+
+<p><strong>More Validation rules will be added from time to time</strong></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../mail/" class="btn btn-neutral float-right" title="Sending Mail">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../models/" class="btn btn-neutral" title="Model"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../models/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../mail/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
