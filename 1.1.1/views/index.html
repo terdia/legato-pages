@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Views - Legato</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Views";
+    var mkdocs_page_input_path = "views.md";
+    var mkdocs_page_url = "/views/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Legato</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../routing/">Routing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../controller/">Controllers</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Views</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#default">Default</a></li>
+    
+
+    <li class="toctree-l2"><a href="#using-blade">Using Blade</a></li>
+    
+
+    <li class="toctree-l2"><a href="#creating-a-view">Creating a View</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#blade">Blade</a></li>
+        
+            <li><a class="toctree-l3" href="#twig">Twig</a></li>
+        
+        </ul>
+    
+
+    <li class="toctree-l2"><a href="#loading-a-view">Loading a view</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#passing-dynamic-data-to-the-view">Passing Dynamic Data to the View</a></li>
+        
+            <li><a class="toctree-l3" href="#displaying-dynamic-data-in-twig-view">Displaying Dynamic Data in Twig View</a></li>
+        
+            <li><a class="toctree-l3" href="#displaying-dynamic-data-in-blade-view">Displaying Dynamic Data in Blade View</a></li>
+        
+            <li><a class="toctree-l3" href="#twig-global-variables">Twig Global Variables</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../database/">Database</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../models/">Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../validation/">Validation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mail/">Sending Mail</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../console/">Legato Console</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Legato</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Views</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Legato framework supports two main templating engine out of the box: </p>
+<ol>
+<li>Twig and </li>
+<li>Blade.</li>
+</ol>
+<p>The default template engine is Twig, of course, you can 
+easily switch to Blade or use raw PHP if you like, to 
+change your template engine update your .env file as follow:</p>
+<h3 id="default">Default</h3>
+<pre><code>TEMPLATE_ENGINE=twig
+</code></pre>
+
+<h3 id="using-blade">Using Blade</h3>
+<pre><code>TEMPLATE_ENGINE=blade
+</code></pre>
+
+<h2 id="creating-a-view">Creating a View</h2>
+<p>Typically all views should be created inside <code>resources/views</code> folder, depending on the templating engine you choose you will then have to create files that correspond to that template engine for example if you choose to use Blade as your template engine then your file extension should end with .blade.php so if you're creating an about us page you might do the following:</p>
+<h3 id="blade">Blade</h3>
+<p>about.blade.php </p>
+<p>the structure will look like so</p>
+<pre><code>
+resources
+|---views
+|       about.blade.php
+
+</code></pre>
+
+<h3 id="twig">Twig</h3>
+<p>about.twig </p>
+<p>the structure will look like so</p>
+<pre><code>
+resources
+|---views
+|       about.twig
+
+</code></pre>
+
+<h2 id="loading-a-view">Loading a view</h2>
+<p>Loading a view is very simple using the global <code>view</code> helper function, which accepts two arguments:</p>
+<ol>
+<li>The name of the view or file to load and </li>
+<li>Optional data array </li>
+</ol>
+<p>To load a particular view file you will use the following method:</p>
+<p><code>view('name');</code></p>
+<p>Consider the following example showing how to load the 
+about page from within a controller:</p>
+<pre><code class="php">
+&lt;?php
+
+namespace App\Controllers;
+
+class IndexController extends BaseController
+{
+
+    public function show()
+    {
+        view('about');
+    }
+}
+
+</code></pre>
+
+<p>when using blade or twig you don't need to specify the extension. </p>
+<h3 id="passing-dynamic-data-to-the-view">Passing Dynamic Data to the View</h3>
+<p>you can also pass data to the view like so:</p>
+<pre><code class="php">&lt;?php
+
+namespace App\Controllers;
+
+use App\Models\User;
+
+class IndexController extends BaseController
+{
+
+    public function show()
+    {
+        $users = User::all();
+
+        view('about', compact('users') );
+    }
+}
+
+</code></pre>
+
+<h3 id="displaying-dynamic-data-in-twig-view">Displaying Dynamic Data in Twig View</h3>
+<p>following the example above we can now display the 
+data in the twig view as follows: </p>
+<pre><code class="twig">
+&lt;h1&gt;Users&lt;/h1&gt;
+&lt;ul&gt;
+    {% for user in users %}
+        &lt;li&gt;{{ user.username }}: {{ user.email }}&lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;
+
+</code></pre>
+
+<h3 id="displaying-dynamic-data-in-blade-view">Displaying Dynamic Data in Blade View</h3>
+<p>following the example above we can now display the data in 
+the blade view as follows: </p>
+<pre><code class="blade">
+&lt;h1&gt;Users&lt;/h1&gt;
+&lt;ul&gt;
+    @foreach($users as $user)
+        &lt;li&gt;{{ $user-&gt;username }}: {{ $user-&gt;email  }}&lt;/li&gt;
+    @endforeach
+&lt;/ul&gt;
+
+</code></pre>
+
+<p>when using blade remember to set the correct template value in <code>.env</code></p>
+<h3 id="twig-global-variables">Twig Global Variables</h3>
+<p>If you wish to declare variables when using twig simply add 
+it to the file <code>config/twig.php</code> for example to declare a global variable called <code>app_name</code> we can do the following:</p>
+<pre><code class="php">
+&lt;?php
+
+return [
+    'twig_global' =&gt; [
+        'app_name' =&gt; getenv('APP_NAME'),
+    ]
+];
+
+</code></pre>
+
+<p>then inside the view, we can reference it like so: </p>
+<pre><code class="twig">
+{% block title %} {{ app_name }}{% endblock %}
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../database/" class="btn btn-neutral float-right" title="Database">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../controller/" class="btn btn-neutral" title="Controllers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../controller/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../database/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

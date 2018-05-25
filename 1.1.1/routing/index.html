@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Routing - Legato</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Routing";
+    var mkdocs_page_input_path = "routing.md";
+    var mkdocs_page_url = "/routing/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Legato</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../installation/">Installation</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Routing</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#where-to-define-your-application-routes">Where to Define Your Application Routes</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#route-with-closure-or-callback">Route with Closure or Callback</a></li>
+        
+            <li><a class="toctree-l3" href="#route-controller">Route Controller</a></li>
+        
+            <li><a class="toctree-l3" href="#defining-get-routes">Defining GET Routes</a></li>
+        
+            <li><a class="toctree-l3" href="#defining-post-routes">Defining POST Routes</a></li>
+        
+            <li><a class="toctree-l3" href="#defining-route-group">Defining Route Group</a></li>
+        
+            <li><a class="toctree-l3" href="#defining-route-resource">Defining Route Resource</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../controller/">Controllers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../views/">Views</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../database/">Database</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../models/">Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../validation/">Validation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mail/">Sending Mail</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../console/">Legato Console</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Legato</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Routing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>Legato Framework router is a simple implementation of AltoRouter use 
+for routing HTTP Request. </p>
+<h2 id="where-to-define-your-application-routes">Where to Define Your Application Routes</h2>
+<p>You should define your routes inside routes.php file which is located in the routes folder when you install a fresh copy of Legato there will be one route defined like so </p>
+<pre><code class="php">
+&lt;?php
+
+# routes/routes.php
+/**
+ * Your application routes go here
+ */
+
+use Legato\Framework\Routing\Route;
+
+/**
+    * @param target, 
+    * @param handler, fully qualified classname and method or Closure 
+    * @param name (optional) must be unique for each route, 
+ */
+
+Route::get('/', 'App\Controllers\IndexController@show', 'homepage');
+
+Route::get('/user/{id}', function ($id) {
+    echo 'Example route using closure '.$id;
+});
+</code></pre>
+
+<h3 id="route-with-closure-or-callback">Route with Closure or Callback</h3>
+<p>You can also define a route that uses a Closure or callback as the handler like so</p>
+<pre><code class="php">
+&lt;?php
+
+Route::get('/user/[i:id]', function ($id) {
+    echo 'Example route using closure '.$id;
+});
+
+</code></pre>
+
+<h3 id="route-controller">Route Controller</h3>
+<pre><code class="php">
+&lt;?php
+
+Route::post('/contact', 'App\Controllers\ContactController@save');
+
+</code></pre>
+
+<p>When you define a controller route, you should also specify 
+the fully qualified name of a controller and method that 
+will be executed for example for the route /contact the 
+controller is ContactController while the method to be 
+executed is save, <code>App\Controllers\ContactController@save</code></p>
+<h3 id="defining-get-routes">Defining GET Routes</h3>
+<pre><code class="php">
+&lt;?php
+/**
+    * @param target, 
+    * @param handler, fully qualified classname and method or Closure 
+    * @param name (optional) must be unique for each route, 
+ */
+
+Route::get('/', 'App\Controllers\IndexController@show');
+
+</code></pre>
+
+<h3 id="defining-post-routes">Defining POST Routes</h3>
+<pre><code class="php">
+&lt;?php
+/**
+    * @param target, 
+    * @param handler, fully qualified classname and method or Closure 
+    * @param name (optional) must be unique for each route, 
+ */
+
+Route::post('/contact', 'App\Controllers\ContactController@save', 'contact_use');
+
+</code></pre>
+
+<p>The Legato Route class supports all major HTTP Verbs (POST, GET, PUT, PATCH, DELETE) for example to create a route with PATCH HTTP verb simple do the following</p>
+<pre><code class="php">
+&lt;?php 
+/**
+    * @param target, 
+    * @param handler, fully qualified classname and method or Closure 
+    * @param name (optional) must be unique for each route, 
+ */
+
+Route::patch('/profile', 'App\Controllers\ProfileController@update');
+
+</code></pre>
+
+<h3 id="defining-route-group">Defining Route Group</h3>
+<pre><code class="php">
+&lt;?php
+
+/**
+    * @param target, 
+    * @param handler, fully qualified classname and method or Closure 
+    * @param name (optional) must be unique for each route, 
+ */
+Route::group('/admin', array(
+    ['GET', '/post', 'App\Controllers\PostController@show'],
+
+    ['POST', '/post', 'App\Controllers\PostController@create'],
+
+    /**
+     * using closure within a route group
+     */
+    ['GET', '/post/delete/[i:id]', function($id) { 
+        echo  'post with '. $id. ' deleted';
+    }],
+));
+
+</code></pre>
+
+<h3 id="defining-route-resource">Defining Route Resource</h3>
+<p>If you are using Legato 1.1.0 you can use the resource method 
+to create RESTFul route</p>
+<pre><code class="php">&lt;?php
+
+Route::resource('/profile', 'ProfileController');
+
+</code></pre>
+
+<p>this will generate the following routes and expected methods:</p>
+<pre><code>
+Verb       URI                       Method             Route Name
+
+GET        /profile                  index              profile_index
+GET        /profile/create           showCreateForm     profile_create_form
+POST       /profile                  save               profile_save
+GET        /profile/[i:id]           show               profile_display
+GET        /profile/[i:id]/edit      showEditForm       profile_edit_form
+POST       /profile/[i:id]           update             profile_update
+GET        /profile/[i:id]/delete    delete             profile_delete
+
+</code></pre>
+
+<p>You should then create all the methods in your controller, like so:</p>
+<pre><code class="php">
+&lt;?php
+
+namespace App\Controllers;
+
+class ProfileController extends BaseController
+{
+    /**
+    * display all profiles
+    */
+    public function index()
+    {
+        //
+    }
+
+    /**
+    * Display the form to create a 
+    */
+    public function showCreateForm()
+    {
+        //
+    } 
+
+    /**
+    * Save the resource  
+    */
+    public function save()
+    {
+        //
+    }
+
+    /**
+    * Display a specific resource 
+    *   
+    * @param $id
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+    * Show the form to edit the resource
+    * 
+    * @param $id
+     */
+    public function showEditForm($id)
+    {
+
+    }
+
+    /**
+    * Update the specified resource
+    * 
+    * @param $id
+     */
+    public function update($id)
+    {
+
+    }
+
+    /**
+    * Delete the specified resource
+    * 
+    * @param $id
+     */
+    public function delete($id)
+    {
+
+    }
+}
+
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../controller/" class="btn btn-neutral float-right" title="Controllers">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../installation/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../installation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../controller/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

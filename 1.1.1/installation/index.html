@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Installation - Legato</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installation";
+    var mkdocs_page_input_path = "installation.md";
+    var mkdocs_page_url = "/installation/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Legato</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Installation</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#installation-requirements">Installation Requirements:</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-your-project-with-virtualhost">Running Your Project With VirtualHost</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-your-project-with-php-inbuilt-server">Running Your Project with PHP inbuilt server</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-your-project-without-virtualhost">Running Your Project Without VirtualHost</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../routing/">Routing</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../controller/">Controllers</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../views/">Views</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../database/">Database</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../models/">Model</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../validation/">Validation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../mail/">Sending Mail</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../console/">Legato Console</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Legato</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="installation-requirements">Installation Requirements:</h2>
+<ul>
+<li>PHP 7.1</li>
+<li>Composer</li>
+</ul>
+<p>Installing Legato is very simple, first ensure you have the right PHP version and composer installed then in your command prompt run:</p>
+<p><code>$ composer create-project legato/legato blog</code></p>
+<p>The above command will create a new Legato project inside a new folder name blog, then: </p>
+<p><code>$ cd blog</code></p>
+<p>and then run </p>
+<p><code>$ composer dump-autoload</code></p>
+<h2 id="running-your-project-with-virtualhost">Running Your Project With VirtualHost</h2>
+<p>The entry point for your Legato framework project is the index.php file 
+which located inside the public directory, of course, you're free to 
+change this according to your need. If you choose to follow the 
+default setup, then you may need to create an entry in /etc/httpd/vhosts (for apache users on Linux) similar to the following:</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+
+    DocumentRoot /var/www/html/blog/public
+
+    ServerName example.com
+
+&lt;/VirtualHost&gt;
+</code></pre>
+
+<p><strong>Restart Apache</strong></p>
+<p><code>$ service httpd restsart</code></p>
+<p>Navigate to http://example.com, you should be able to view the app.</p>
+<h2 id="running-your-project-with-php-inbuilt-server">Running Your Project with PHP inbuilt server</h2>
+<p>This is the faster and easier way to start using Legato framework, to run Legato using the inbuilt php server do one of the following: </p>
+<p><strong>Default</strong></p>
+<p>Open the terminal and switch to your project root directory and then type the command below</p>
+<p><code>php legato start</code> </p>
+<p>This will start a server which you can access at: <code>http://localhost:8000</code></p>
+<p>if the server fails to start because it could not find the PHP executable, 
+then you may pass in the <code>--path</code> option to specify the path for your PHP executable 
+for example on a linux OS you may type <code>which php</code> to determine the path of your php 
+executable in most cases it will be <code>/usr/bin/php</code> or simply <code>php</code>. </p>
+<p>To specify the path to your PHP executable type:</p>
+<p><code>php legato start --path=/usr/bin/php</code></p>
+<p><strong>Specifying a Different Hostname</strong></p>
+<p>if you wish to specify a different hostname you can pass in an 
+optional hostname option to the start command like so:</p>
+<p><code>php legato start --hostname=example.com</code></p>
+<p>make sure to create the domain entry inside your hosts file like so:</p>
+<pre><code class="hosts">#hosts file
+127.0.0.1 example.com
+</code></pre>
+
+<p>This will start a php server which you can access at: <code>http://example.com:8000</code></p>
+<p><strong>Specifying a Different Port number</strong></p>
+<p>if you wish to specify a different port you can pass in an 
+optional port option to the start command like so:</p>
+<p><code>php Legato start --port=8009</code></p>
+<p>this will start a php server which you can access at: <code>http://localhost:8009</code></p>
+<p><strong>Specifying a Different Hostname and Port number</strong></p>
+<p>if you wish to use a different hostname and port altogether then make sure to create the hostname entry inside your hosts file:</p>
+<pre><code class="hosts">#hosts file
+127.0.0.1 example.com
+</code></pre>
+
+<p>then issue the start command with both options, the order does not matter</p>
+<p><code>php Legato start --hostname=example.com --port=8009</code></p>
+<p><strong>With all options</strong></p>
+<p><code>php Legato start --hostname=example.com --port=8009 --path=/usr/bin/php</code></p>
+<p>this will start a php server which you can access at: <code>http://example.com:8009</code></p>
+<h2 id="running-your-project-without-virtualhost">Running Your Project Without VirtualHost</h2>
+<p>if you choose to run your project without VirtualHost, 
+for example, accessing it with http://localhost/blog/public 
+then ensure to update application css and javascript path from <code>/css/all.css</code> absolute to <code>css.all.css</code> relative.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../routing/" class="btn btn-neutral float-right" title="Routing">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../routing/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
