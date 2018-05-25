@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Controllers - Legato</title>
+  <title>Legato Console - Legato</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -17,9 +17,9 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Controllers";
-    var mkdocs_page_input_path = "controller.md";
-    var mkdocs_page_url = "/controller/";
+    var mkdocs_page_name = "Legato Console";
+    var mkdocs_page_input_path = "console.md";
+    var mkdocs_page_url = "/console/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -62,25 +62,9 @@
     <a class="" href="../routing/">Routing</a>
 	    </li>
           
-            <li class="toctree-l1 current">
+            <li class="toctree-l1">
 		
-    <a class="current" href="./">Controllers</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l2"><a href="#creating-a-controller">Creating a Controller</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l3" href="#using-the-command-line-tool">Using the command line tool</a></li>
-        
-            <li><a class="toctree-l3" href="#basecontroler">BaseControler</a></li>
-        
-            <li><a class="toctree-l3" href="#a-more-complete-example">A more complete example</a></li>
-        
-        </ul>
-    
-
-    </ul>
+    <a class="" href="../controller/">Controllers</a>
 	    </li>
           
             <li class="toctree-l1">
@@ -108,14 +92,21 @@
     <a class="" href="../mail/">Sending Mail</a>
 	    </li>
           
-            <li class="toctree-l1">
+            <li class="toctree-l1 current">
 		
-    <a class="" href="../console/">Legato Console</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../UPGRADE-1.1.2/">Upgrade From 1.1.1 to 1.1.2</a>
+    <a class="current" href="./">Legato Console</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#generating-commands">Generating Commands</a></li>
+    
+
+    <li class="toctree-l2"><a href="#registering-your-commands">Registering Your Commands</a></li>
+    
+
+    <li class="toctree-l2"><a href="#running-you-command">Running You Command</a></li>
+    
+
+    </ul>
 	    </li>
           
         </ul>
@@ -140,7 +131,7 @@
     
       
     
-    <li>Controllers</li>
+    <li>Legato Console</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -150,85 +141,73 @@
           <div role="main">
             <div class="section">
               
-                <p>The controller is generally responsible for performing a request action.</p>
-<h2 id="creating-a-controller">Creating a Controller</h2>
-<p>You can simply create a controller by using the Legato inbuilt 
-command line tool or simply create a new file inside the controllers' 
-folder which is inside the app folder. If you use the command line 
-tool then everything will be set up for automatically.</p>
-<h3 id="using-the-command-line-tool">Using the command line tool</h3>
-<p>To create a controller with the command line tool, first, 
-open your terminal or command prompt for windows users then change 
-directory to the root of your legato project</p>
-<pre><code>$ cd /project/root/path
-
-then type
-
-$ php Legato add:controller UserController
-</code></pre>
-
-<p>This will create a new class inside <code>app/controllers</code> like so, 
-<code>/app/controllers/UserController</code> in the namespace namespace <code>App\Controllers</code></p>
+                <p>Legato console is built on to of Symfony console, providing some useful commands out of the box, see all available commands simply type: </p>
+<p><code>php Legato list</code></p>
+<h3 id="generating-commands">Generating Commands</h3>
+<p>To create a new command, use the add:command Legato command. This command will create a new command class in the app/commands directory. </p>
+<p><code>php legato add:command MyCommand</code></p>
+<p>out file: app/commands/MyCommand.php with the following contents</p>
 <pre><code class="php">
 &lt;?php
+namespace App\Command;
 
-namespace App\Controllers;
+use Legato\Framework\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
-class UserController extends BaseController
+class MyCommand extends Command
 {
+    /**
+     * Identifier for the console command
+     *
+     * @var string
+     */
+    protected $commandName = 'example:command';
 
-}
-?&gt;
+    /**
+     * Command description
+     *
+     * @var string
+     */
+    protected $description = 'Sample command without argument';
 
-</code></pre>
-
-<p>if you like to place your controller in a subfolder then do the following</p>
-<pre><code>$ php Legato add:controller UserFolder/UserController
-</code></pre>
-
-<p>The location will be /app/controllers/UserFolder/UserController </p>
-<h3 id="basecontroler">BaseControler</h3>
-<p>All controller should extend BaseController 
-(this is already done for you if you created your controller using 
-the inbuilt command line tool) in other to have access to Request.</p>
-<p><strong>You can reference request like so</strong></p>
-<pre><code class="php">
-&lt;?php
-
-$request = $this-&gt;request; // contains the entire request object
-
-</code></pre>
-
-<h3 id="a-more-complete-example">A more complete example</h3>
-<pre><code class="php">
-&lt;?php
-
-namespace App\Controllers;
-
-class UserController extends BaseController
-{
-    public function show()
+    public function __construct($name = null)
     {
-        /**
-         * Retrieve value from request, used for both POST and GET request
-         */
-        $username = $this-&gt;request-&gt;input('username'); 
+        parent::__construct($name);
+    }
 
-        /**
-         * Set a username session 
-         */
-        session()-&gt;set('username', $username);
-
-        /**
-         * Get the value of the username session
-         */
-        $sessionUsername = session()-&gt;get('username');
-
-        view('home.twig', compact($sessionUsername));
+    /**
+     * You command logic
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return void
+     */
+    public function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output-&gt;write('This is a sample command.');
     }
 }
 
 </code></pre>
+
+<h3 id="registering-your-commands">Registering Your Commands</h3>
+<p>To register your commands, simple add then to the <code>app/commands/register.php</code> like so </p>
+<pre><code class="php">
+&lt;?php
+
+return [
+    \App\Command\Example::class,
+    \App\Command\MyCommand::class,
+];
+
+</code></pre>
+
+<p>make sure to use the fully qualified class name as shown in the code snippet above i.e. include namespace if any</p>
+<h3 id="running-you-command">Running You Command</h3>
+<p>To run you command type:</p>
+<p><code>php legato example:command</code> </p>
+<p>and the output based on the example here will be "This is a sample command."</p>
               
             </div>
           </div>
@@ -236,10 +215,8 @@ class UserController extends BaseController
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../views/" class="btn btn-neutral float-right" title="Views">Next <span class="icon icon-circle-arrow-right"></span></a>
       
-      
-        <a href="../routing/" class="btn btn-neutral" title="Routing"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mail/" class="btn btn-neutral" title="Sending Mail"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -265,10 +242,8 @@ class UserController extends BaseController
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="../routing/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../mail/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
-      
-        <span style="margin-left: 15px"><a href="../views/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

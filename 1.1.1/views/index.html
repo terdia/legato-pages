@@ -101,8 +101,6 @@
         
             <li><a class="toctree-l3" href="#twig-global-variables">Twig Global Variables</a></li>
         
-            <li><a class="toctree-l3" href="#registering-twig-extensions">Registering Twig Extensions</a></li>
-        
         </ul>
     
 
@@ -132,11 +130,6 @@
             <li class="toctree-l1">
 		
     <a class="" href="../console/">Legato Console</a>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <a class="" href="../UPGRADE-1.1.2/">Upgrade From 1.1.1 to 1.1.2</a>
 	    </li>
           
         </ul>
@@ -303,28 +296,6 @@ return [
 {% block title %} {{ app_name }}{% endblock %}
 
 </code></pre>
-
-<h3 id="registering-twig-extensions">Registering Twig Extensions</h3>
-<p>If your application require some twig extensions then you can register them by updating the <code>extensions</code> 
-array in the file <code>config/twig.php</code> like so:</p>
-<pre><code class="php">&lt;?php
-
-return [
-    'twig_global' =&gt; [
-        'app_name' =&gt; config('APP_NAME', 'Legato Framework'),
-        ...
-    ],
-    'extensions' =&gt; [
-        'global' =&gt; \Legato\Framework\TwigGlobal::class,
-        'debug' =&gt; \Twig_Extension_Debug::class,
-        'somekey_irrelevant' =&gt; 'Your extension class',
-        ...
-    ],
-];
-</code></pre>
-
-<p>By default the dump extension will be registered for you if you set the environment
-variable <code>APP_ENV</code> to true in your <code>.env</code> file</p>
               
             </div>
           </div>
