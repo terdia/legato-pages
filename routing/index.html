@@ -119,6 +119,11 @@
     <a class="" href="../console/">Legato Console</a>
 	    </li>
           
+            <li class="toctree-l1">
+		
+    <a class="" href="../UPGRADE-1.1.2/">Upgrade From 1.1.1 to 1.1.2</a>
+	    </li>
+          
         </ul>
       </div>
       &nbsp;
@@ -250,18 +255,15 @@ Route::patch('/profile', 'App\Controllers\ProfileController@update');
     * @param handler, fully qualified classname and method or Closure 
     * @param name (optional) must be unique for each route, 
  */
-Route::group('/admin', array(
-    ['GET', '/post', 'App\Controllers\PostController@show'],
 
-    ['POST', '/post', 'App\Controllers\PostController@create'],
+Route::group('/admin', function (){
+    Route::add('GET', '/dashboard', 'controller@stop', 'admin_dashboard');
+    Route::add('POST', '/users', 'controller@users', 'admin_users');
 
-    /**
-     * using closure within a route group
-     */
-    ['GET', '/post/delete/[i:id]', function($id) { 
-        echo  'post with '. $id. ' deleted';
-    }],
-));
+    Route::add('GET', '/user/[i:id]', function($id) { 
+             echo  'get user with Id: '. $id;
+     }, 'admin_view_user');
+});
 
 </code></pre>
 
@@ -288,7 +290,10 @@ GET        /profile/[i:id]/delete    delete             profile_delete
 
 </code></pre>
 
-<p>You should then create all the methods in your controller, like so:</p>
+<p>You should then create all the methods in your controller, this can be done using 
+the Legato commandline tool or manually, if you choose to use the commandline tool then:</p>
+<p><code>php legato add:controller ProfileController --restful</code></p>
+<p>The above command will create a ProfileController controller with the content below:</p>
 <pre><code class="php">
 &lt;?php
 

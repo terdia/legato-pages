@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/installation/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>/routing/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -28,7 +28,7 @@
     
     <url>
      <loc>/controller/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +36,7 @@
     
     <url>
      <loc>/views/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -44,7 +44,7 @@
     
     <url>
      <loc>/database/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -52,7 +52,7 @@
     
     <url>
      <loc>/models/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -60,7 +60,7 @@
     
     <url>
      <loc>/validation/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -68,7 +68,7 @@
     
     <url>
      <loc>/mail/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -76,7 +76,15 @@
     
     <url>
      <loc>/console/</loc>
-     <lastmod>2018-05-22</lastmod>
+     <lastmod>2018-05-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/UPGRADE-1.1.2/</loc>
+     <lastmod>2018-05-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
