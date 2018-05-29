@@ -111,6 +111,9 @@
     <li class="toctree-l2"><a href="#dependency-injection">Dependency Injection</a></li>
     
 
+    <li class="toctree-l2"><a href="#authentication-and-encryption-support">Authentication And Encryption Support</a></li>
+    
+
     </ul>
 	    </li>
           
@@ -218,6 +221,32 @@ return [
 <p><strong>Note:</strong> if you want the dependency to be shared then set the value to <code>shared</code>, 
  if you want to bind the dependency as <code>singleton</code> 
  otherwise just set it to <code>bind</code></p>
+<h3 id="authentication-and-encryption-support">Authentication And Encryption Support</h3>
+<p>To take advantage of Authentication and Encryption support update <code>app.php</code> as shown below:</p>
+<pre><code class="php">&lt;?php 
+
+return [
+      /*
+       * class that should be automatically resolved by the IOC
+       * value can be: shared, bind, singleton
+       */
+      'dependencies' =&gt; [
+         //example: \Legato\Framework\Request::class =&gt; 'shared',
+      ],
+      'auth' =&gt; [
+          'fields' =&gt; ['username', 'email'],
+          'model' =&gt; \App\Models\User::class,
+          'activation' =&gt; [], //column name =&gt; value
+      ],
+      'encryption' =&gt; [
+          'key' =&gt; 'euyq74taeoqiertpeuyq74taeoqiertp',
+          'cipher' =&gt; 'AES-128-CBC'
+      ]
+  ];
+
+</code></pre>
+
+<p><strong>Note:</strong> complete docs for Authentication and encryption will be added soon.</p>
               
             </div>
           </div>
